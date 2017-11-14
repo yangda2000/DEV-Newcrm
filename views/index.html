@@ -1,9 +1,58 @@
 <html>
   <head>
+  	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <title>Main</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <style type="text/css">
+	    body{position:relative;background-color:#f5f4f4;}
+
+	    #lgn_wrap{position:absolute;top:180px;left:50%;margin-left:-220px;}
+	    #lgn_container{text-align:center;}
+	    #lgn_container span{font-family:Nanum Barun Gothic,"나눔고딕",NanumGothic,"돋움",sans-serif;font-size:16px;color:#5a5959;}
+	    #lgn_container .input_area{margin-top:24px;}
+	    #lgn_container .input_area .lgn_input{display:inline-block;width:100%;height:53px;font-size:15px;border:1px solid #dadada;margin-bottom:15px;}
+	    #lgn_container .input_area .btn_login{width:100%;height:64px;font-family:Nanum Barun Gothic,"나눔고딕",NanumGothic,"돋움",sans-serif;font-size:22px;color:#fff;background-color:#f6d40b;border:0;border-radius:8px;}
+    </style>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  	<script src="http://land.dp25.kr/land/js/common.js"></script>
+    <script>
+    	function login(){
+    		var id = $("#id").val();
+    		var pw = $("#password").val();
+    		if(!id || !pw){
+    			alert("제대로 입력하세요");
+    			return false;
+    		}
+	    	$.ajax({
+				type : "GET",
+				url : "/login/"+id+"/"+pw,
+				async: true, //동기식으로 처리 (결과 끝나고 코드 처리 해야해서)
+				success : function(json){
+					var login = json;
+					console.log(login);
+				},
+	    	})
+	    }
+    </script>
   </head>
   <body>
+  	<div id="lgn_wrap">
+	    <div id="lgn_header">
+	        <img src="http://gq257.dp25.kr:8080/banana/banana/img/lgn_logo.gif" alt="BANANA" />
+	    </div>
+	    <div id="lgn_container">
+	        <span>Login 계정을 입력하세요.</span>	        
+	            <div class="input_area">
+	                <input class="lgn_input" type="text" placeholder="아이디" id="id" required/>
+	                <input class="lgn_input" type="text" placeholder="비밀번호" id="password" required/>
+	                <input type="button" value="로그인" class="btn_login" onclick="javascript:login();">
+	            </div>	        
+	    </div>
+	    <div style="text-align: center; margin-top: 10px;">V.2.02</div>
+    </div>
+
     Hey, this is index page
+    <p id="id"></p>
+    <a href="/login/coo_user/banana">가자</a>
   </body>
 </html>

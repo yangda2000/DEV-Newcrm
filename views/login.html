@@ -1,0 +1,33 @@
+<!DOCTYPE>
+<html>
+  <head>
+  	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  	<script src="http://land.dp25.kr/land/js/common.js"></script>
+    <title>Main</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <style type="text/css">
+	    
+    </style>
+    <script>
+    	var id = $.getP("id");
+    	var pw = $.getP("password");
+    	console.log(id);
+    	console.log(pw);
+    	$.ajax({
+			type : "GET",
+			url : "/login/"+id+"/"+pw,
+			async: true, //동기식으로 처리 (결과 끝나고 코드 처리 해야해서)
+			success : function(json){
+				var login = json;
+				console.log(login);
+			},
+    	})
+    </script>
+
+  </head>
+  <body>
+    Hey, this is index page
+    <p id="id"></p>
+    <a href="/login/coo_user/banana">가자</a>
+  </body>
+</html>

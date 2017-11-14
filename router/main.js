@@ -7,6 +7,14 @@ module.exports = function(app, fs)
     app.get('/about',function(req,res){
     	res.render('about.html');
     });
+
+	app.post('/login',function(req,res){
+		//console.log(req.body)
+		//console.log(req.params.id)
+    	//res.render('login.html');    	
+    	res.status(200).json(req.body);
+    });
+
     //첫번째 API: GET /list
     app.get('/list', function (req, res) {
     	fs.readFile( __dirname + "/../data/" + "user.json", 'utf8', function (err, data) {
@@ -109,5 +117,53 @@ module.exports = function(app, fs)
             })
         })
 
+    })
+    // LOGIN API
+    app.get('/login/:username/:password', function(req, res){
+        var sess;
+        sess = req.session;        
+
+        fs.readFile(__dirname + "/../data/user.json", "utf8", function(err, data){
+            var users = JSON.parse(data);            
+            var username = req.params.username;
+            var password = req.params.password;
+            //console.log(users[username]);
+            var result = {};
+            if(!users[username]){
+                // USERNAME NOT FOUND
+                result["success"] = 0;
+                result["error"] = "not found";
+                res.json(result);
+                return;
+            }
+
+            if(users[username]["password"] == password){
+                result["success"] = 1;
+                sess.username = username;
+                sess.name = users[username]["name"];
+                console.log(sess);
+                res.json(result);
+
+            }else{
+                result["success"] = 0;
+                result["error"] = "incorrect";
+                res.json(result);
+            }
+        })
+    });
+    //LOGOUT API
+    app.get('/logout', function(req, res){
+        sess = req.session;
+        if(sess.username){
+            req.session.destroy(function(err){
+                if(err){
+                    console.log(err);
+                }else{
+                    res.redirect('/');
+                }
+            })
+        }else{
+            res.redirect('/');
+        }
     })
 }
