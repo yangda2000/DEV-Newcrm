@@ -19,7 +19,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //app.use(express.static(path.join(__dirname, 'bnnland')));
 // 가상디렉토리 app.use('/static', express.static('public'));
 //app.use('/static', express.static(__dirname + '/public'));
-console.log(__dirname);
+console.log('디렉토리 경로:'+__dirname);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
