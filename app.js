@@ -32,7 +32,7 @@ db.once('open', function(){
     console.log("Connected to mongod server");
 });
 
-mongoose.connect('mongodb://localhost/mongodb_tutorial');
+mongoose.connect('mongodb://banana:bananamongo@localhost/mongodb_tutorial?authSource=admin');
 // DEFINE MODEL
 var Book = require('./models/book');
 // [CONFIGURE APP TO USE bodyParser]
