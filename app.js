@@ -35,11 +35,12 @@ db.once('open', function(){
 mongoose.connect('mongodb://banana:bananamongo@localhost/mongodb_tutorial?authSource=admin');
 // DEFINE MODEL
 var Book = require('./models/book');
+var Gamst = require('./models/gamst');
 // [CONFIGURE APP TO USE bodyParser]
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // [CONFIGURE ROUTER]
-var router = require('./router/main')(app, fs, Book);
+var router = require('./router/main')(app, fs, Book, Gamst);
 // [RUN SERVER]
 var server = app.listen(3000, function(){
  console.log("Express server has started on port 3000")

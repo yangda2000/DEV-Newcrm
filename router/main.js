@@ -1,4 +1,4 @@
-module.exports = function(app, fs, Book)
+module.exports = function(app, fs, Book, Gamst)
 {
     app.get('/',function(req,res){
         res.render('index.html')
@@ -199,8 +199,29 @@ module.exports = function(app, fs, Book)
 	    book.title = req.body.title;
 	    book.author = req.body.author;
 	    book.published_date = new Date(req.body.published_date);
+	    book.noschema = req.body.noschema;
 
 	    book.save(function(err){
+	        if(err){
+	            console.error(err);
+	            res.json({result: 0});
+	            return;
+	        }
+
+	        res.json({result: 1, req : req.body});
+
+	    });
+    });
+
+    // CREATE GAMST
+    app.post('/api/gamsts', function(req, res){
+        var gamst = new Gamst();
+	    gamst.title = req.body.title;
+	    gamst.author = req.body.author;
+	    gamst.published_date = new Date(req.body.published_date);
+	    gamst.noschema = req.body.noschema;
+
+	    gamst.save(function(err){
 	        if(err){
 	            console.error(err);
 	            res.json({result: 0});
