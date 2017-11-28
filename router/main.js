@@ -198,8 +198,8 @@ module.exports = function(app, fs, Book, Gamst)
         var book = new Book();
 	    book.title = req.body.title;
 	    book.author = req.body.author;
-	    book.published_date = new Date(req.body.published_date);
-	    book.noschema = req.body.noschema;
+	    //book.published_date = new Date(req.body.published_date);
+	    book.noschema = req.body;
 
 	    book.save(function(err){
 	        if(err){
