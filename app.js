@@ -3,6 +3,7 @@ var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
 var mongoose = require("mongoose");
+var autoIncrement = require('mongoose-auto-increment');
 var session = require('express-session');
 var fs = require("fs")
 
@@ -32,15 +33,17 @@ db.once('open', function(){
     console.log("Connected to mongod server");
 });
 
-mongoose.connect('mongodb://banana:bananamongo@localhost/mongodb_tutorial?authSource=admin');
+var connect = mongoose.connect('mongodb://banana:bananamongo@localhost/mongodb_tutorial?authSource=admin');
+autoIncrement.initialize(connect);
+
 // DEFINE MODEL
-var Book = require('./models/book');
+var Crm_users_db = require('./models/crm_users_db');
 var Gamst = require('./models/gamst');
 // [CONFIGURE APP TO USE bodyParser]
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // [CONFIGURE ROUTER]
-var router = require('./router/main')(app, fs, Book, Gamst);
+var router = require('./router/main')(app, fs, Crm_users_db, Gamst);
 // [RUN SERVER]
 var server = app.listen(3000, function(){
  console.log("Express server has started on port 3000")

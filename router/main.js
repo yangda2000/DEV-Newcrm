@@ -1,4 +1,4 @@
-module.exports = function(app, fs, Book, Gamst)
+module.exports = function(app, fs, Crm_users_db, Gamst)
 {
     app.get('/',function(req,res){
         res.render('index.html')
@@ -195,20 +195,20 @@ module.exports = function(app, fs, Book, Gamst)
 
     // CREATE BOOK
     app.post('/api/books', function(req, res){
-        var book = new Book();
-	    book.title = req.body.title;
-	    book.author = req.body.author;
+        var crm_users_db = new Crm_users_db();
+	    //book.title = req.body.title;
+	    //book.author = req.body.author;
 	    //book.published_date = new Date(req.body.published_date);
-	    book.noschema = req.body;
+	    crm_users_db.data = req.body;
 
-	    book.save(function(err){
+	    crm_users_db.save(function(err){
 	        if(err){
 	            console.error(err);
 	            res.json({result: 0});
 	            return;
 	        }
 
-	        res.json({result: 1, req : req.body});
+	        res.json({result: 1, req : req.body, url : req.path });
 
 	    });
     });
