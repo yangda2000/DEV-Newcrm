@@ -1,4 +1,4 @@
-module.exports = function(app, fs, Crm_users_db, Gamst)
+module.exports = function(app, fs, Crm_users_db, Crm_user)
 {
     app.get('/',function(req,res){
         res.render('index.html')
@@ -194,7 +194,7 @@ module.exports = function(app, fs, Crm_users_db, Gamst)
     });
 
     // CREATE BOOK
-    app.post('/api/books', function(req, res){
+    app.post('/api/crm_users_db', function(req, res){
         var crm_users_db = new Crm_users_db();
 	    //book.title = req.body.title;
 	    //book.author = req.body.author;
@@ -213,15 +213,19 @@ module.exports = function(app, fs, Crm_users_db, Gamst)
 	    });
     });
 
-    // CREATE GAMST
-    app.post('/api/gamsts', function(req, res){
-        var gamst = new Gamst();
-	    gamst.title = req.body.title;
-	    gamst.author = req.body.author;
-	    gamst.published_date = new Date(req.body.published_date);
-	    gamst.noschema = req.body.noschema;
+    // CREATE crm_user
+    app.post('/api/crm_user', function(req, res){
+        var crm_user = new Crm_user();
+	    crm_user.formid = req.body.bcode;
+	    crm_user.name = req.body.name;
+	    crm_user.siteurl = req.body.siteurl;
+	    crm_user.customscript = req.body.customscript;
+	    crm_user.altid = req.body.altid;	        
+	    crm_user.id = req.body.id;
+	    crm_user.password = req.body.password;
+	    crm_user.descript = req.body.descript;
 
-	    gamst.save(function(err){
+	    crm_user.save(function(err){
 	        if(err){
 	            console.error(err);
 	            res.json({result: 0});

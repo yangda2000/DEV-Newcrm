@@ -38,12 +38,12 @@ autoIncrement.initialize(connect);
 
 // DEFINE MODEL
 var Crm_users_db = require('./models/crm_users_db');
-var Gamst = require('./models/gamst');
+var Crm_user = require('./models/crm_user');
 // [CONFIGURE APP TO USE bodyParser]
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // [CONFIGURE ROUTER]
-var router = require('./router/main')(app, fs, Crm_users_db, Gamst);
+var router = require('./router/main')(app, fs, Crm_users_db, Crm_user);
 // [RUN SERVER]
 var server = app.listen(3000, function(){
  console.log("Express server has started on port 3000")
