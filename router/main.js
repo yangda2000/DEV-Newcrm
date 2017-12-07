@@ -216,14 +216,14 @@ module.exports = function(app, fs, Crm_users_db, Crm_user)
     // CREATE crm_user
     app.post('/api/crm_user', function(req, res){
         var crm_user = new Crm_user();
-	    crm_user.formid = req.body.bcode;
-	    crm_user.name = req.body.name;
-	    crm_user.siteurl = req.body.siteurl;
-	    crm_user.customscript = req.body.customscript;
-	    crm_user.altid = req.body.altid;	        
-	    crm_user.id = req.body.id;
-	    crm_user.password = req.body.password;
-	    crm_user.descript = req.body.descript;
+	    crm_user.FORMID = req.body.bcode;
+	    crm_user.NAME = req.body.name;
+	    crm_user.SITEURL = req.body.siteurl;
+	    crm_user.CUSTOMSCRIPT = req.body.customscript;
+	    crm_user.ALTID = req.body.altid;	        
+	    crm_user.ID = req.body.id;
+	    crm_user.PASSWORD = req.body.password;
+	    crm_user.DESCRIPT = req.body.descript;
 
 	    crm_user.save(function(err){
 	        if(err){
