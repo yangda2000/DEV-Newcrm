@@ -25,6 +25,7 @@
     "express-session": "^1.15.6",
     "mongoose": "^4.13.4",
     "mongoose-auto-increment": "^5.0.1",
-    "nodemon": "^1.12.1"
+    "nodemon": "^1.12.1",
+    "pm2": "^2.8.0"
   }
 }
