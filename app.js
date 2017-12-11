@@ -33,7 +33,7 @@ db.once('open', function(){
     console.log("Connected to mongod server");
 });
 
-var connect = mongoose.connect('mongodb://banana:bananamongo@localhost/mongodb_tutorial?authSource=admin');
+var connect = mongoose.connect('mongodb://banana:bananamongo@localhost/banana?authSource=admin');
 autoIncrement.initialize(connect);
 
 // DEFINE MODEL
