@@ -19,6 +19,7 @@
   "homepage": "https://github.com/yangda2000/DEV-Newcrm#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
     "date-utils": "^1.2.21",
     "ejs": "^2.5.7",
     "express": "^4.16.2",

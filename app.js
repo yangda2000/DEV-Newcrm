@@ -5,8 +5,10 @@ var bodyParser = require('body-parser');
 var mongoose = require("mongoose");
 var autoIncrement = require('mongoose-auto-increment');
 var session = require('express-session');
-var fs = require("fs")
+var fs = require("fs");
+var cors = require("cors");
 
+app.use(cors()); 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
