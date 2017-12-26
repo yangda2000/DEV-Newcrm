@@ -193,7 +193,44 @@ module.exports = function(app, fs, Crm_users_db, Crm_user)
 	    })
     });
 
-    // CREATE BOOK
+    //GET crm_user list
+    app.get('/api/crm_user/list/', function(req, res){
+    	Crm_user.find(function(err, crm_users){
+	        if(err) return res.status(500).send({error: 'database failure'});
+	        res.json(crm_users);
+	    })
+    	
+    });
+
+    //GET crm_user list ALTID		ex)http://localhost:3000/api/crm_user/list/8
+    app.get('/api/crm_user/list/:ALTID', function(req, res){
+    	Crm_user.find({ALTID: req.params.ALTID}, function(err, crm_users){
+	        if(err) return res.status(500).json({error: err});
+	        if(crm_users.length === 0) return res.status(404).json({error: 'book not found'});
+	        res.json(crm_users);
+	    })
+    });
+ 
+ 	//GET crm_users_db list
+    app.get('/api/crm_users_db/list/', function(req, res){
+    	Crm_users_db.find(function(err, crm_users_db){
+	        if(err) return res.status(500).json({error: err});	        
+	        res.json(crm_users_db);
+	    })
+    });
+
+    //GET crm_users_db list code	
+    app.get('/api/crm_users_db/list/:code', function(req, res){
+    	Crm_users_db.find({"data.code": req.params.code+" "}, function(err, crm_users_db){
+    		//ex)"code" : "519 " 값에 띄어쓰기가 있으므로
+    		console.log(req.params.code+" dd");
+	        if(err) return res.status(500).json({error: err});
+	        if(crm_users_db.length === 0) return res.status(404).json({error: 'book not found'});
+	        res.json(crm_users_db);
+	    })
+    });
+
+    // CREATE crm_users_db
     app.post('/api/crm_users_db', function(req, res){
         var crm_users_db = new Crm_users_db();
 	    //book.title = req.body.title;
