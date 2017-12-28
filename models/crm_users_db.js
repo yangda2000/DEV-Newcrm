@@ -4,7 +4,7 @@ var autoIncrement = require('mongoose-auto-increment');
 
 var crm_users_db_Schema = new Schema({   
     delflag: { type: String, default: "N"},
-    regdate: { type: Date, default: Date.now  },
+    REGDATE: { type: Date, default: Date.now  },
     data: { type: mongoose.Schema.Types.Mixed, trim: true}
 });
 
