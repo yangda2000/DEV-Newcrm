@@ -203,10 +203,11 @@ module.exports = function(app, fs, Crm_users_db, Crm_user)
     });
 
     //GET crm_user list ALTID		ex)http://localhost:3000/api/crm_user/list/8
-    app.get('/api/crm_user/list/:ALTID', function(req, res){
-    	Crm_user.find({ALTID: req.params.ALTID}, function(err, crm_users){
+    app.get('/api/crm_user/list/:FORMID', function(req, res){
+    	Crm_user.find({FORMID: ""+req.params.FORMID, "delflag" : "N"}, function(err, crm_users){
+    		console.log("아이디:"+req.params.FORMID);
 	        if(err) return res.status(500).json({error: err});
-	        if(crm_users.length === 0) return res.status(404).json({error: 'book not found'});
+	        if(crm_users.length === 0) return res.status(404).json({error: '잘못된 아이디입니다.'});
 	        res.json(crm_users);
 	    })
     });
@@ -221,7 +222,7 @@ module.exports = function(app, fs, Crm_users_db, Crm_user)
 
     //GET crm_users_db list code	
     app.get('/api/crm_users_db/list/:code', function(req, res){
-    	Crm_users_db.find({"data.code": req.params.code+" "}, function(err, crm_users_db){
+    	Crm_users_db.find({"data.code": req.params.code+" ", "delflag" : "N"}, function(err, crm_users_db){
     		//ex)"code" : "519 " 값에 띄어쓰기가 있으므로
     		console.log(req.params.code+" dd");
 	        if(err) return res.status(500).json({error: err});

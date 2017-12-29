@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 var autoIncrement = require('mongoose-auto-increment');
 
 var crm_user_Schema = new Schema({
-    DELFLAG: { type: String, default: "N"},        
+    delflag: { type: String, default: "N"},        
     DESCRIPT: [mongoose.Schema.Types.Mixed],
     FORMID: String,
     NAME: String,
