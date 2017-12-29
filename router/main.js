@@ -212,7 +212,7 @@ module.exports = function(app, fs, Crm_users_db, Crm_user)
 	    })
     });
 
-    //GET crm_user list FORMID		ex)http://localhost:3000/api/crm_user/list/리플/1111
+    //GET crm_user list FORMID 로그인 안해도 되는 부분 ex)http://localhost:3000/api/crm_user/list/리플/1111
     app.get('/api/crm_user/list/:ID/:PASSWORD', function(req, res){
     	Crm_user.find({ID: ""+req.params.ID, PASSWORD: ""+req.params.PASSWORD, "delflag" : "N"}, function(err, crm_users){
     		console.log("아이디:"+req.params.ID+"/ 비밀번호:"+req.params.PASSWORD );
