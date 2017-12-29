@@ -202,12 +202,22 @@ module.exports = function(app, fs, Crm_users_db, Crm_user)
     	
     });
 
-    //GET crm_user list ALTID		ex)http://localhost:3000/api/crm_user/list/8
+    //GET crm_user list FORMID		ex)http://localhost:3000/api/crm_user/list/8
     app.get('/api/crm_user/list/:FORMID', function(req, res){
     	Crm_user.find({FORMID: ""+req.params.FORMID, "delflag" : "N"}, function(err, crm_users){
     		console.log("아이디:"+req.params.FORMID);
 	        if(err) return res.status(500).json({error: err});
 	        if(crm_users.length === 0) return res.status(404).json({error: '잘못된 아이디입니다.'});
+	        res.json(crm_users);
+	    })
+    });
+
+    //GET crm_user list FORMID		ex)http://localhost:3000/api/crm_user/list/리플/1111
+    app.get('/api/crm_user/list/:ID/:PASSWORD', function(req, res){
+    	Crm_user.find({ID: ""+req.params.ID, PASSWORD: ""+req.params.PASSWORD, "delflag" : "N"}, function(err, crm_users){
+    		console.log("아이디:"+req.params.ID+"/ 비밀번호:"+req.params.PASSWORD );
+	        if(err) return res.status(500).json({error: err});
+	        if(crm_users.length === 0) return res.status(404).json({error: '잘못된 계정입니다.'});
 	        res.json(crm_users);
 	    })
     });
