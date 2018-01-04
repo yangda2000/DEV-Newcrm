@@ -20,7 +20,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //app.use('/static', express.static(__dirname + '/public'));
 console.log('디렉토리 경로:'+__dirname);
 
-
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
  secret: '@#@$MYSIGN#@$#$',
  resave: false,
@@ -42,7 +42,7 @@ autoIncrement.initialize(connect);
 var Crm_users_db = require('./models/crm_users_db');
 var Crm_user = require('./models/crm_user');
 // [CONFIGURE APP TO USE bodyParser]
-app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(bodyParser.json());
 // [CONFIGURE ROUTER]
 var router = require('./router/main')(app, fs, Crm_users_db, Crm_user);

@@ -119,10 +119,20 @@ module.exports = function(app, fs, Crm_users_db, Crm_user)
 
     })
     // LOGIN API
-    app.get('/login/:username/:password', function(req, res){
+    app.get('/login/:ID/:PASSWORD', function(req, res){
         var sess;
         sess = req.session;        
 
+		Crm_user.find({ID: ""+req.params.ID, PASSWORD: ""+req.params.PASSWORD, "delflag" : "N"}, function(err, crm_users){
+			console.log("아이디:"+req.params.ID+"/ 비밀번호:"+req.params.PASSWORD );
+	        if(err) return res.status(500).json({error: err});
+	        if(crm_users.length === 0) return res.status(404).json({error: '잘못된 계정입니다.'});
+	        sess.formid = crm_users.FORMID;
+	        console.log(sess);
+	        res.json(crm_users);
+	    })
+
+		/*
         fs.readFile(__dirname + "/../data/user.json", "utf8", function(err, data){
             var users = JSON.parse(data);            
             var username = req.params.username;
@@ -150,6 +160,7 @@ module.exports = function(app, fs, Crm_users_db, Crm_user)
                 res.json(result);
             }
         })
+        */
     });
     //LOGOUT API
     app.get('/logout', function(req, res){
