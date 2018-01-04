@@ -130,6 +130,7 @@ module.exports = function(app, fs, Crm_users_db, Crm_user)
 	        sess.formid = crm_users["FORMID"];
 	        console.log("session:"+sess);
 	        console.log("crm_users:"+crm_users);
+	        console.log("crm_users['FORMID']:"+crm_users["FORMID"]);
 	        res.json(crm_users);
 	    })
 
