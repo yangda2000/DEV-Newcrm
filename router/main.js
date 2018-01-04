@@ -128,7 +128,8 @@ module.exports = function(app, fs, Crm_users_db, Crm_user)
 	        if(err) return res.status(500).json({error: err});
 	        if(crm_users.length === 0) return res.status(404).json({error: '잘못된 계정입니다.'});
 	        sess.formid = crm_users["FORMID"];
-	        console.log(sess);
+	        console.log("session:"+sess);
+	        console.log("crm_users:"+crm_users);
 	        res.json(crm_users);
 	    })
 
